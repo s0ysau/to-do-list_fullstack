@@ -9,7 +9,7 @@ export default function TodoList({
   }) {
     return (
       <>
-        <h1>Create Todo</h1>
+        <h2>New Item</h2>
         <input
           type="text"
           onKeyDown={(e) => {

@@ -11,7 +11,6 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Router>
-      <h1>My To Do List</h1>
       <App />
     </Router>
   </StrictMode>
