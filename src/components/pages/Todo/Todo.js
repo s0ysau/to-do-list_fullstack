@@ -1,6 +1,11 @@
 import { useState } from "react"
 
-export default function Todo({ todo, completeTodo, editTodoText, deleteTodo }) {
+export default function Todo({ 
+  todo, 
+  completeTodo, 
+  editTodoText, 
+  deleteTodo 
+}) {
   const [showInput, setShowInput] = useState(false)
   return (
     <li>
@@ -13,8 +18,8 @@ export default function Todo({ todo, completeTodo, editTodoText, deleteTodo }) {
           {todo.text}
         </h2>
         <input
-          style={{ display: showInput ? "block" : "none" }}
           type="text"
+          style={{ display: showInput ? "block" : "none" }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               editTodoText(todo.id, e)

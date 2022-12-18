@@ -1,7 +1,7 @@
 import Todo from "../Todo/Todo"
 
 export default function TodoList({
-    todo,
+    todos,
     addTodo,
     completeTodo,
     deleteTodo,
@@ -16,17 +16,17 @@ export default function TodoList({
             e.key === "Enter" && addTodo(e)
           }}
         />
-        {todo.length ? (
+        {todos.length ? (
           <>
             <h1>Todo Items</h1>
             <ul className="todolist">
-              {todo
+              {todos
                 .filter((i) => !i.completed)
                 .map((todo) => {
                   return (
                     <Todo
                       key={todo.id}
-                      todo={todo}
+                      todos={todo}
                       completeTodo={completeTodo}
                       deleteTodo={deleteTodo}
                       editTodoText={editTodoText}
@@ -36,13 +36,13 @@ export default function TodoList({
             </ul>
             <h1>Completed Items </h1>
             <ul className="todolist">
-              {todo
+              {todos
                 .filter((i) => i.completed)
                 .map((todo) => {
                   return (
                     <Todo
                       key={todo.id}
-                      todo={todo}
+                      todos={todo}
                       completeTodo={completeTodo}
                       deleteTodo={deleteTodo}
                       editTodoText={editTodoText}

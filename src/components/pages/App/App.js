@@ -7,7 +7,7 @@ export default function App () {
 
   const fetchState = async () => {
     try {
-      const response = await fetch('api/test')
+      const response = await fetch('api/todolist')
       const data = await response.json()
       setState(data)
     } catch (err) {
