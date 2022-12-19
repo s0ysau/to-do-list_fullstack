@@ -1,31 +1,29 @@
 import { useState } from "react"
 
 export default function Todo({ 
-  todos, 
+  todo, 
   completeTodo, 
   editTodoText, 
   deleteTodo 
-}) {
+}) 
+{
   const [showInput, setShowInput] = useState(false)
-
-
-
-
-
-
-  
   return (
     <li>
       <div className="left">
-        <h2 onClick={(e) => {setShowInput(!showInput)}}>
-          {todos.text}
+        <h2
+          onClick={(e) => {
+            setShowInput(!showInput)
+          }}
+        >
+          {todo.text}
         </h2>
         <input
-          type="text"
           style={{ display: showInput ? "block" : "none" }}
+          type="text"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              editTodoText(todos.id, e)
+              editTodoText(todo.id, e)
               setShowInput(false)
             }
           }}
@@ -35,16 +33,16 @@ export default function Todo({
         Complete
         <input
           type="checkbox"
-          checked={todos.completed}
+          checked={todo.completed}
           onChange={(e) => {
-            completeTodo(todos.id, e)
+            completeTodo(todo.id, e)
           }}
         />
       </label>
       <button
-        checked={todos.completed}
+        checked={todo.completed}
         onClick={(e) => {
-          deleteTodo(todos.id)
+          deleteTodo(todo.id)
         }}
       >
         Delete Todo

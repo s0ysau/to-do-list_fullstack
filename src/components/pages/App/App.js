@@ -15,10 +15,6 @@ export default function App () {
     }
   }
 
-  useEffect(() => {
-    fetchState()
-  }, [])
-
   const addTodo = (evt) => {
     const newTodo = { text: evt.target.value, id: Date.now(), completed: false}
     setTodos([newTodo, ...todos])
@@ -47,10 +43,15 @@ const deleteTodo = (id) => {
   setTodos([...todosCopy])
 };
 
+
+  useEffect(() => {
+    fetchState()
+  }, [])
+
 return (
   <main className="App">
     <h1 className="my-list">My To Do List</h1>
-    <TodoList
+    <TodoList 
       addTodo={addTodo}
       completeTodo={completeTodo}
       editTodoText={editTodoText}

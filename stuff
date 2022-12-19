@@ -13,13 +13,19 @@
 
 
   //index
-  /*const getTodo = async () => {
+  /*  // index
+  const getTodo = async () => {
     try {
-      const response = await fetch('/api/todolist')
+      const response = await fetch('/api/todolist', {
+        method: "GET",
+        header: {
+          'Content-Type': 'application/json'
+        }
+      })
       const data = await response.json()
       setTodos(data)
     } catch (error) {
-      console.error(error)
+    console.error(error)
     }
   }
   //delete
@@ -69,7 +75,43 @@
       console.error(error)
     }
   }
+  
+  const addTodo = (evt) => {
+    const newTodo = { text: evt.target.value, id: Date.now(), completed: false}
+    setTodos([newTodo, ...todos])
+    evt.target.value = ""
+  }
+
+  const completeTodo = (id, e) => {
+    const todosCopy = [...todos]
+    const indexOfTodo = todosCopy.findIndex((i) => i.id === id )
+    todosCopy[indexOfTodo].completed = !todosCopy[indexOfTodo].completed
+    setTodos(todosCopy)
+}
+
+const editTodoText = (id, e) => {
+  const todosCopy = [...todos]
+  const indexOfTodo = todosCopy.findIndex((i) => i.id === id)
+  todosCopy[indexOfTodo].text = e.target.value
+  setTodos([...todosCopy])
+  e.target.value = ""
+}
+
+const deleteTodo = (id) => {
+  const todosCopy = [...todos]
+  const indexOfTodo = todosCopy.findIndex((i) => i.id === id)
+  todosCopy.splice(indexOfTodo, 1)
+  setTodos([...todosCopy])
+};
+  
+
+  
   */
+
+
+
+
+
 
 
 //   return (
