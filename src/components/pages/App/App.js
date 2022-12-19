@@ -49,7 +49,7 @@ const deleteTodo = (id) => {
 
 return (
   <main className="App">
-    <h1>My To Do List</h1>
+    <h1 className="my-list">My To Do List</h1>
     <TodoList
       addTodo={addTodo}
       completeTodo={completeTodo}

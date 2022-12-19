@@ -7,11 +7,18 @@ export default function Todo({
   deleteTodo 
 }) {
   const [showInput, setShowInput] = useState(false)
+
+
+
+
+
+
+  
   return (
     <li>
       <div className="left">
         <h2 onClick={(e) => {setShowInput(!showInput)}}>
-          {todos.title}
+          {todos.text}
         </h2>
         <input
           type="text"
