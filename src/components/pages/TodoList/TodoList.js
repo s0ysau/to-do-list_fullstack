@@ -1,41 +1,40 @@
-import Todo from "../Todo/Todo"
-import {useState, useEffect} from 'react'
+import Todo from '../Todo/Todo'
+import { useState, useEffect } from 'react'
 
-export default function TodoList(
-    // todos,
-    // addTodo,
-    // completeTodo,
-    // deleteTodo,
-    // editTodoText
-    props
-  ) 
-  {
+export default function TodoList (
+  // todos,
+  // addTodo,
+  // completeTodo,
+  // deleteTodo,
+  // updatedTodo
+  props
+) {
   const [todos, setTodos] = useState([])
   const [foundTodos, setFoundTodos] = useState(null)
   const [newTodo, setNewTodo] = useState({
-    title: "",
+    title: '',
     completed: false
   })
-    // index
+  // index
   const getTodo = async () => {
     try {
-      const response = await fetch(`/api/todolist`)
+      const response = await fetch('/api/todolist')
       const data = await response.json()
       setTodos(data)
     } catch (error) {
-    console.error(error)
+      console.error(error)
     }
   }
 
-  // update 
-  const editTodoText = async (_id, updatedData) => {
+  // update
+  const updatedTodo = async (_id, updatedData) => {
     try {
       const response = await fetch(`/api/todolist/${_id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...updatedData})
+        body: JSON.stringify({ ...updatedData })
       })
       const data = await response.json()
       setFoundTodos(data)
@@ -43,31 +42,31 @@ export default function TodoList(
       console.error(error)
     }
   }
-  // create 
-    const createTodo = async () => {
-      try {
-        const response = await fetch(`/api/todolist`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
+  // create
+  const createTodo = async () => {
+    try {
+      const response = await fetch('/api/todolist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...newTodo})
-        })
-        const data = await response.json()
-        setFoundTodos(data)
-        setNewTodo({
-          title: '',
-          completed: false
-        })
-      } catch (error) {
-        console.error(error)
-      }
+        body: JSON.stringify({ ...newTodo })
+      })
+      const data = await response.json()
+      setFoundTodos(data)
+      setNewTodo({
+        title: '',
+        completed: false
+      })
+    } catch (error) {
+      console.error(error)
     }
-      //delete
+  }
+  // delete
   const deleteTodo = async (_id) => {
     try {
       const response = await fetch(`/api/todolist/${_id}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
@@ -79,42 +78,44 @@ export default function TodoList(
     }
   }
 
-    const completeTodo = (_id, e) => {
-    const todosCopy = [...todos]
-    const indexOfTodo = todosCopy.findIndex((i) => i._id === _id )
-    todosCopy[indexOfTodo].completed = !todosCopy[indexOfTodo].completed
-    setTodos([...todosCopy])
-}
+  const completeTodo = (_id, e) => {
+    const todoSpead = [...todos]
+    const indexOfTodo = todoSpead.findIndex((idx) => idx._id === _id)
+    todoSpead[indexOfTodo].completed = !todoSpead[indexOfTodo].completed
+    setTodos([...todoSpead])
+  }
 
-const handleOnKeyDown = (evt) => {
-  evt.preventDefault()
-  createTodo()
-}
+  const handleOnKeyDown = (evt) => {
+    evt.preventDefault()
+    createTodo()
+  }
 
-const handleChange = (evt) => {
-  setNewTodo({...newTodo,  [evt.target.name]:evt.target.value, completed: false})
-}
+  const handleChange = (evt) => {
+    setNewTodo({ ...newTodo, [evt.target.name]: evt.target.value, completed: false })
+  }
 
-    useEffect(() => {
-      getTodo()
-    }, [foundTodos])
+  useEffect(() => {
+    getTodo()
+  }, [foundTodos])
 
-    return (
-      <>
-        <h1>New Item</h1>
-        <input
-          type="text"
-          name={"title"}
-          onChange={handleChange}
-          value={newTodo.title}
-          onKeyDown={(evt) => {
-            evt.key === "Enter" && handleOnKeyDown(evt)
-          }}
-        />
-        {todos.length ? (
+  return (
+    <>
+      <h5 className='new-item'>New Item</h5>
+      <input
+        type='text'
+        name='title'
+        onChange={handleChange}
+        value={newTodo.title}
+        onKeyDown={(evt) => {
+          evt.key === 'Enter' && handleOnKeyDown(evt)
+        }}
+        className="input-field"
+      />
+      {todos.length
+        ? (
           <>
-            <h1>To Do Items</h1>
-            <ul className="todolist">
+            <h4 className='todolist-items'>To Do Items:</h4>
+            <ul className='todolist'>
               {todos
                 .filter((i) => !i.completed)
                 .map((todo) => {
@@ -124,13 +125,13 @@ const handleChange = (evt) => {
                       todo={todo}
                       completeTodo={completeTodo}
                       deleteTodo={deleteTodo}
-                      editTodoText={editTodoText}
+                      updatedTodo={updatedTodo}
                     />
                   )
                 })}
             </ul>
-            <h1>Completed Items </h1>
-            <ul className="todolist">
+            <h1>Completed</h1>
+            <ul className='todolist'>
               {todos
                 .filter((i) => i.completed)
                 .map((todo) => {
@@ -140,15 +141,16 @@ const handleChange = (evt) => {
                       todo={todo}
                       completeTodo={completeTodo}
                       deleteTodo={deleteTodo}
-                      editTodoText={editTodoText}
+                      updatedTodo={updatedTodo}
                     />
                   )
                 })}
             </ul>
           </>
-        ) : (
+          )
+        : (
           <h1>No Todos Added Yet</h1>
-        )}
-      </>
-    )
-  }
+          )}
+    </>
+  )
+}

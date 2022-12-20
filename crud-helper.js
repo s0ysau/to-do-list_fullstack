@@ -1,6 +1,6 @@
 // Connect to the database
-require('dotenv').config();
-require('./config/db');
+require('dotenv').config()
+require('./config/db')
 
 // Require the Mongoose models
 // const User = require('./models/user');
@@ -11,5 +11,5 @@ require('./config/db');
 const Todo = require('./models/todo')
 
 // Local variables will come in handy for holding retrieved documents
-let user, item, category, order, todo;
-let users, items, categories, orders, todos;
+let user, item, category, order, todo
+let users, items, categories, orders, todos
