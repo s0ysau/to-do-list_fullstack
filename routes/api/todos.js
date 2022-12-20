@@ -4,7 +4,7 @@ const { dataController, apiController } = require('../../controllers/api/todo')
 
 // index - /api/todos/
 router.get('/', dataController.index, apiController.index)
-// create - /api/todos 
+// create - /api/todos
 router.post('/', dataController.create, apiController.show)
 // update - /api/todos/:id
 router.put('/:id', dataController.update, apiController.show)

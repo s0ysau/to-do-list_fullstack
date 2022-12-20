@@ -2,7 +2,7 @@ const Todo = require('../../models/todo')
 
 const dataController = {
   // index
-  index(req, res, next){
+  index (req, res, next) {
     Todo.find({}, (err, foundTodos) => {
       if (err) {
         res.status(400).send({
@@ -15,7 +15,7 @@ const dataController = {
     })
   },
   // delete
-  destroy(req, res, next){
+  destroy (req, res, next) {
     Todo.findByIdAndDelete(req.params.id, (err, deletedTodo) => {
       if (err) {
         res.status(400).send({
@@ -28,9 +28,9 @@ const dataController = {
     })
   },
   // update
-  update(req, res, next){
-    req.params.completed = req.params.completed === 'on'
-    Todo.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedTodo) => {
+  update (req, res, next) {
+    req.params.completed = req.body.completed === 'on'
+    Todo.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedTodo) => {
       if (err) {
         res.status(400).send({
           msg: err.message
@@ -42,7 +42,7 @@ const dataController = {
     })
   },
   // create
-  create(req, res, next){
+  create (req, res, next) {
     req.params.completed = req.body.completed === 'on'
     Todo.create(req.body, (err, createdTodo) => {
       if (err) {
@@ -56,7 +56,7 @@ const dataController = {
     })
   },
   // show
-  show(req, res, next){
+  show (req, res, next) {
     Todo.findById(req.params.id, (err, foundTodos) => {
       if (err) {
         res.status(404).send({
@@ -72,13 +72,13 @@ const dataController = {
 }
 
 const apiController = {
-  // index 
-  index(req, res, next){
+  // index
+  index (req, res, next) {
     res.json(res.locals.data.todos)
   },
-  
-  // show 
-  show(req, res, next){
+
+  // show
+  show (req, res, next) {
     res.json(res.locals.data.todo)
   }
 }

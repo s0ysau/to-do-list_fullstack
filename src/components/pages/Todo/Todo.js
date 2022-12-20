@@ -1,16 +1,16 @@
-import { useState } from "react"
+import { useState } from 'react'
 
-export default function Todo({ 
-  todo, 
-  completeTodo, 
-  deleteTodo 
-}) 
-{
-  
+export default function Todo ({
+  todo,
+  updatedTodo,
+  completeTodo,
+  deleteTodo
+}) {
   const [showInput, setShowInput] = useState(false)
+
   return (
     <li>
-      <div className="left">
+      <div className='left'>
         <h2
           onClick={(e) => {
             setShowInput(!showInput)
@@ -19,19 +19,20 @@ export default function Todo({
           {todo.title}
         </h2>
         <input
-          style={{ display: showInput ? "block" : "none" }}
-          type="text"
+          style={{ display: showInput ? 'block' : 'none' }}
+          type='text'
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === 'Enter') {
               setShowInput(!showInput)
+              updatedTodo(todo._id)
             }
           }}
         />
       </div>
-      <label className="middle">
+      <label className='middle'>
         Complete
         <input
-          type="checkbox"
+          type='checkbox'
           checked={todo.completed}
           onChange={() => {
             completeTodo(todo._id)
@@ -44,7 +45,7 @@ export default function Todo({
           deleteTodo(todo._id)
         }}
       >
-        Delete Todo
+        Remove
       </button>
     </li>
   )
