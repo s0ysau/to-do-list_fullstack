@@ -7,6 +7,7 @@ export default function Todo ({
   deleteTodo
 }) {
   const [showInput, setShowInput] = useState(false)
+
   return (
     <li>
       <div className='left'>

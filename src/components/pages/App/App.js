@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import TodoList from '../TodoList/TodoList'
 
 export default function App () {
-  const [todos, setTodos] = useState([])
   const [state, setState] = useState(null)
 
   const fetchState = async () => {

@@ -1,14 +1,7 @@
 import Todo from '../Todo/Todo'
 import { useState, useEffect } from 'react'
 
-export default function TodoList (
-  // todos,
-  // addTodo,
-  // completeTodo,
-  // deleteTodo,
-  // updatedTodo
-  props
-) {
+export default function TodoList (props) {
   const [todos, setTodos] = useState([])
   const [foundTodos, setFoundTodos] = useState(null)
   const [newTodo, setNewTodo] = useState({
@@ -27,17 +20,18 @@ export default function TodoList (
   }
 
   // update
-  const updatedTodo = async (_id, updatedData) => {
+  const updatedTodo = async (_id, updateToDoItem) => {
     try {
       const response = await fetch(`/api/todolist/${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...updatedData })
+        body: JSON.stringify({ ...updateToDoItem })
       })
       const data = await response.json()
       setFoundTodos(data)
+      // editTodoText(data)
     } catch (error) {
       console.error(error)
     }
@@ -79,11 +73,19 @@ export default function TodoList (
   }
 
   const completeTodo = (_id, e) => {
-    const todoSpead = [...todos]
-    const indexOfTodo = todoSpead.findIndex((idx) => idx._id === _id)
-    todoSpead[indexOfTodo].completed = !todoSpead[indexOfTodo].completed
-    setTodos([...todoSpead])
+    const todoSpread = [...todos]
+    const indexOfTodo = todoSpread.findIndex((idx) => idx._id === _id)
+    todoSpread[indexOfTodo].completed = !todoSpread[indexOfTodo].completed
+    setTodos([...todoSpread])
   }
+
+  // const editTodoText = (_id, evt) => {
+  //   const todoSpread = [...todos]
+  //   const indexOfTodo = todoSpread.findIndex((idx) => idx._id === _id)
+  //   todoSpread[indexOfTodo].text = evt.target.value
+  //   setTodos([...todoSpread])
+  //   evt.target.value = ""
+  // }
 
   const handleOnKeyDown = (evt) => {
     evt.preventDefault()
@@ -109,7 +111,7 @@ export default function TodoList (
         onKeyDown={(evt) => {
           evt.key === 'Enter' && handleOnKeyDown(evt)
         }}
-        className="input-field"
+        className='input-field'
       />
       {todos.length
         ? (
