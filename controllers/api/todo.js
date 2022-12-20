@@ -44,7 +44,7 @@ const dataController = {
   // create
   create(req, res, next){
     req.params.completed = req.body.completed === 'on'
-    Todo.create(req.params.body, (err, createdTodo) => {
+    Todo.create(req.body, (err, createdTodo) => {
       if (err) {
         res.status(400).send({
           msg: err.message
