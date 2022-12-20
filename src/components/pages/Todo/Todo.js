@@ -3,10 +3,10 @@ import { useState } from "react"
 export default function Todo({ 
   todo, 
   completeTodo, 
-  editTodoText, 
   deleteTodo 
 }) 
 {
+  
   const [showInput, setShowInput] = useState(false)
   return (
     <li>
@@ -16,15 +16,14 @@ export default function Todo({
             setShowInput(!showInput)
           }}
         >
-          {todo.text}
+          {todo.title}
         </h2>
         <input
           style={{ display: showInput ? "block" : "none" }}
           type="text"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              editTodoText(todo.id, e)
-              setShowInput(false)
+              setShowInput(!showInput)
             }
           }}
         />
@@ -34,15 +33,15 @@ export default function Todo({
         <input
           type="checkbox"
           checked={todo.completed}
-          onChange={(e) => {
-            completeTodo(todo.id, e)
+          onChange={() => {
+            completeTodo(todo._id)
           }}
         />
       </label>
       <button
         checked={todo.completed}
-        onClick={(e) => {
-          deleteTodo(todo.id)
+        onClick={() => {
+          deleteTodo(todo._id)
         }}
       >
         Delete Todo
